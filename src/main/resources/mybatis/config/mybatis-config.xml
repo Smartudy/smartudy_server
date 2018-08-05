@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <!-- 퍼시스턴스 프레임워크란, 데이터의 CRUD를 지원하는 클래스 및 설정파일의 집합 -->
+  <!-- SqlSessionFactory를 만들기 위한 설계도 ,현대 그룹의 공장 설계도-->
+  
+<configuration>
+  <typeAliases>
+          <typeAlias alias="accountDto" type="com.sharewith.smartudy.dto.AccountDto"/> <!-- Mapper에서 사용될 별명 -->
+  </typeAliases>
+</configuration>

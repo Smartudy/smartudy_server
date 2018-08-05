@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<!-- root-context는 모든 웹 앱이 공유하는 빈 설정파일이다. 이곳에 데이터베이스 관련 설정을 해주자. -->
+	
+  	  <context:property-placeholder location ="classpath:/mybatis/config/db.properties"/>
+  		
+      <bean id = "dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"/>
+      </bean>
+      
+	 <!-- 1번 : 공장을 짓자. sqlSessionFactory라는 sqlsession을 만들어내는 공장을 만들기 위해서는 설계도(configLocation)이 필요하다. -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:/mybatis/config/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath*:com/sharewith/smartudy/dao/**/*.xml" />
+    </bean>
+
+  	<!--2번 : 공장에서 sqlSession을 생산하자. sqlSession은 실행중에 맵퍼 xml에 있는 sql을 dao 인터페이스에 맵핑 한다.
+  		sqlSessionTemPlate은 sqlsession.openssion(),close()를 자동으로 해주는 SqlSession인터페이스를 구현한 클래스.-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	  <property name="mapperInterface" value="com.sharewith.smartudy.dao.UserMapper" />
+	  <property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
+	<!-- mapper팩토리에서 mapper를 만들어낸다. mapper = dao이기때문에 구현된 dao를 바로 사용할수 있다. 
+		원래는 sqlSession.getMapper()를 호출해야 매퍼xml이 매퍼 인터페이스와 연결 되는데, 팩토리를 사용하여 매퍼를 생산하면 더 편하다.
+		그 매퍼로 바로 Dao인터페이스의 메소드 호출 가능. 매퍼인터페이스 경로에 매퍼xml파일이 같이 있다면 매퍼xml위치를 지정할 필요가 없다.-->
+	
+	
+	<!-- 
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+         <property name="basePackage" value="com.sharewith.smartudy.dao" />
+    </bean>-->
+
+<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+
+</beans>
