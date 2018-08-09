@@ -1,5 +1,10 @@
 package com.sharewith.smartudy.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +16,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.BindingResultUtils;
 import org.springframework.validation.ObjectError;
@@ -21,7 +29,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -29,6 +39,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sharewith.smartudy.dao.UserMapper;
 import com.sharewith.smartudy.dto.AccountDto;
+import com.sharewith.smartudy.dto.MultipartDto;
 import com.sharewith.smartudy.service.MemberService;
 
 @Controller
@@ -46,6 +57,7 @@ public class MemberController {
         binder.setValidator(validator);
     }
     
+
 	@RequestMapping(value = "/join")
 	public @ResponseBody String Join(@Valid AccountDto account,BindingResult result) {
 		String error = CheckError(result);

@@ -17,4 +17,7 @@ public interface UserMapper {
 	
 	@Select("SELECT COUNT(*) FROM account WHERE nickname = #{str} OR phone = #{str}")
 	int isMember(@Param("str") String str);
+	
+	@Select("SELECT id FROM account WHERE phone = #{phone}")
+	int findIdByPhone(String phone);
 }
