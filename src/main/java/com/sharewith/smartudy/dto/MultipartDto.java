@@ -9,22 +9,26 @@ import org.springframework.web.multipart.MultipartFile;
 public class MultipartDto {
 	String title;
 	String content;
+	String time;
+	String money;
+	String hashtag;
+    String subject;
+    String category;
 	ArrayList<MultipartFile> images;
-	MultipartFile audio;
+	ArrayList<MultipartFile> audios;
+	ArrayList<MultipartFile> draws;
 	
-	
-	
-	public ArrayList<MultipartFile> getImages() {
-		return images;
+	public String getMoney() {
+		return money;
 	}
-	public void setImages(ArrayList<MultipartFile> images) {
-		this.images = images;
+	public void setMoney(String money) {
+		this.money = money;
 	}
-	public MultipartFile getAudio() {
-		return audio;
+	public String getCategory() {
+		return category;
 	}
-	public void setAudio(MultipartFile audio) {
-		this.audio = audio;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getTitle() {
 		return title;
@@ -38,4 +42,49 @@ public class MultipartDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public String getHashtag() {
+		return hashtag;
+	}
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public ArrayList<MultipartFile> getImages() {
+		return images;
+	}
+	public void setImages(ArrayList<MultipartFile> images) {
+		this.images = images;
+	}
+	public ArrayList<MultipartFile> getAudios() {
+		return audios;
+	}
+	public void setAudios(ArrayList<MultipartFile> audios) {
+		this.audios = audios;
+	}
+	public ArrayList<MultipartFile> getDraws() {
+		return draws;
+	}
+	public void setDraws(ArrayList<MultipartFile> draws) {
+		this.draws = draws;
+	}
+	@Override
+	public String toString() {
+		return "MultipartDto [title=" + title + ", content=" + content + ", time=" + time + ", money=" + money
+				+ ", hashtag=" + hashtag + ", subject=" + subject + ", category=" + category + ", images=" + images
+				+ ", audios=" + audios + ", draws=" + draws + "]";
+	}
+	
+	
+	
 }

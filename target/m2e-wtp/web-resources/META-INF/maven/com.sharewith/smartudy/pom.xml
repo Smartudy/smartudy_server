@@ -23,6 +23,13 @@
 		<version>1.2.1</version> 
 	</dependency>
 	
+	<!-- log4jdbc-remix -->
+	<dependency>
+        <groupId>org.lazyluke</groupId>
+        <artifactId>log4jdbc-remix</artifactId>
+        <version>0.2.7</version>
+	</dependency>
+	
 	<dependency>
 	    <groupId>commons-io</groupId>
 	    <artifactId>commons-io</artifactId>
@@ -53,13 +60,40 @@
 		    <artifactId>jackson-mapper-asl</artifactId>
 		    <version>1.9.13</version>
 		</dependency>
-
+		
+		  
+		<dependency>
+		<groupId>net.sf.json-lib</groupId>
+		<artifactId>json-lib</artifactId>
+		<version>2.4</version>
+		<classifier>jdk15</classifier>
+		</dependency>
+		
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
+		<!-- Spring Unit Test -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.11</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>1.9.5</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>3.2.3.RELEASE</version>
+		    <scope>test</scope>
+		</dependency>
 		
 		<!-- Gson -->
 	    <dependency>

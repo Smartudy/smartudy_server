@@ -25,7 +25,7 @@
 		<beans:property name="dao" ref="userMapper"/>
 	</beans:bean>
 	
-	<beans:bean id="qnaservice" class="com.sharewith.smartudy.service.QnAService">
+	<beans:bean id="qnaservice" class="com.sharewith.smartudy.service.BoardService">
 		<beans:property name="dao" ref="qnaMapper"/>
 		<beans:property name="dao2" ref="userMapper"/>
 	</beans:bean>

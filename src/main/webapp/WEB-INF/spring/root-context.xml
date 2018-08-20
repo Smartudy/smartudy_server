@@ -10,12 +10,7 @@
 	
   	  <context:property-placeholder location ="classpath:/mybatis/config/db.properties"/>
   		
-      <bean id = "dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
-        <property name="driverClassName" value="${driver}"/>
-        <property name="url" value="${url}"/>
-        <property name="username" value="${user}"/>
-        <property name="password" value="${password}"/>
-      </bean>
+      
       
 	 <!-- 1번 : 공장을 짓자. sqlSessionFactory라는 sqlsession을 만들어내는 공장을 만들기 위해서는 설계도(configLocation)이 필요하다. -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -39,7 +34,7 @@
 		그 매퍼로 바로 Dao인터페이스의 메소드 호출 가능. 매퍼인터페이스 경로에 매퍼xml파일이 같이 있다면 매퍼xml위치를 지정할 필요가 없다.-->
 		
 	<bean id="qnaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-	  <property name="mapperInterface" value="com.sharewith.smartudy.dao.qnaMapper" />
+	  <property name="mapperInterface" value="com.sharewith.smartudy.dao.BoardMapper" />
 	  <property name="sqlSessionTemplate" ref="sqlSession" />
 	</bean>
 	
@@ -60,5 +55,26 @@
 	  <property name="supportedMediaTypes" value="text/plain;charset=UTF-8"/>
 	</bean>
 	
+	  <bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"/>
+      </bean>
+      
+	    
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+	        <constructor-arg ref="dataSourceSpied" />
+	        <property name="logFormatter">
+	            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+	                <property name="loggingType" value="MULTI_LINE" />
+	                <property name="sqlPrefix" value="SQL         :  "/>
+	            </bean>
+	        </property>
+	 </bean>
+	 
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+     	<property name="dataSource" ref="dataSource"/>
+	</bean>
 	
 </beans>

@@ -1,5 +1,7 @@
 package com.sharewith.smartudy.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,14 +13,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonObject;
 import com.sharewith.smartudy.dto.MultipartDto;
-import com.sharewith.smartudy.service.QnAService;
+import com.sharewith.smartudy.dto.Question;
+import com.sharewith.smartudy.service.BoardService;
 
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
     @Autowired
-	QnAService service;
+	BoardService service;
 	
 	@RequestMapping(value = "/post", method=RequestMethod.POST)
 	public @ResponseBody String post(MultipartDto dto,HttpServletRequest request) {
@@ -31,4 +34,24 @@ public class BoardController {
 		}
 		return root.toString();
 	}
+	
+	@RequestMapping(value = "/listpage", method=RequestMethod.GET)
+	public @ResponseBody String listpage(HttpServletRequest request) {
+		String page = request.getParameter("page");
+		String category = request.getParameter("category");
+		String result = service.getQuestions(category,page);
+		if(result != null)
+			return result;
+		return null;
+	}
+	
+	@RequestMapping(value = "/questioncount", method=RequestMethod.GET)
+	public @ResponseBody String getQuestionCount(HttpServletRequest request) {
+		String page = request.getParameter("category");
+		String result = service.getQuestionCount(page);
+		if(result != null)
+			return result;
+		return null;
+	}
+	
 }
