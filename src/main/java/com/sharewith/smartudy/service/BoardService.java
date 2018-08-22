@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sharewith.smartudy.dao.UserMapper;
 import com.sharewith.smartudy.dao.BoardMapper;
+import com.sharewith.smartudy.dao.UserMapper;
 import com.sharewith.smartudy.dto.AccountDto;
 import com.sharewith.smartudy.dto.MultipartDto;
 import com.sharewith.smartudy.dto.Question;
@@ -62,11 +62,15 @@ public class BoardService {
 		return obj.toString();
 	}
 	
-	public boolean insert(MultipartDto dto,HttpServletRequest request) {
+	public boolean insert(MultipartDto dto,HttpServletRequest request,int qna) {
 		String text,imagepath,audiopath,drawpath = "";
 		HashMap<String,String> map = new HashMap<String,String>();
 		System.out.println(dto.toString());
 		HttpSession session = request.getSession();
+		if(qna == 1) { //Answer테이블에 삽입하는 경우
+			map.put("grp",dto.getGrp());
+			System.out.println("그룹 아이디는"+dto.getGrp());
+		}
 		map.put("title",dto.getTitle());
 		map.put("content",dto.getContent());
 		map.put("subject", dto.getSubject());
@@ -121,7 +125,11 @@ public class BoardService {
 		    	map.put("draw"+c++,e.getOriginalFilename());
 			}
 		}
-		dao.InsertQ(map);
+		if(qna == 0) {
+			dao.InsertQuestion(map);
+		}else {
+			dao.InsertAnswer(map);
+		}
 		return true;
 	}
 	

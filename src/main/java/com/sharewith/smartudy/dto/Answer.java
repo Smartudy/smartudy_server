@@ -2,8 +2,9 @@ package com.sharewith.smartudy.dto;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Question {
+public class Answer {
 	private int id;
+	private String grp;
     private String title;
     private String content;
     private String hashtag;
@@ -11,6 +12,12 @@ public class Question {
     private String money;
     private String time;
 
+    public String getGrp() {
+		return grp;
+	}
+	public void setGrp(String grp) {
+		this.grp = grp;
+	}
 	public int getId() {
 		return id;
 	}
@@ -55,7 +62,7 @@ public class Question {
     }
 	@Override
 	public String toString() {
-		return "Question [id=" + id + ", title=" + title + ", content=" + content + ", hashtag="
+		return "Answer [id=" + id + ", grp=" + grp + ", title=" + title + ", content=" + content + ", hashtag="
 				+ hashtag + ", image1=" + image1 + ", money=" + money + ", time=" + time + "]";
 	}
     

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MultipartDto {
 	String title;
 	String content;
+	String grp;
 	String time;
 	String money;
 	String hashtag;
@@ -18,6 +19,12 @@ public class MultipartDto {
 	ArrayList<MultipartFile> audios;
 	ArrayList<MultipartFile> draws;
 	
+	public String getGrp() {
+		return grp;
+	}
+	public void setGrp(String grp) {
+		this.grp = grp;
+	}
 	public String getMoney() {
 		return money;
 	}
@@ -80,9 +87,9 @@ public class MultipartDto {
 	}
 	@Override
 	public String toString() {
-		return "MultipartDto [title=" + title + ", content=" + content + ", time=" + time + ", money=" + money
-				+ ", hashtag=" + hashtag + ", subject=" + subject + ", category=" + category + ", images=" + images
-				+ ", audios=" + audios + ", draws=" + draws + "]";
+		return "MultipartDto [title=" + title + ", content=" + content + ", grp=" + grp + ", time=" + time + ", money="
+				+ money + ", hashtag=" + hashtag + ", subject=" + subject + ", category=" + category + ", images="
+				+ images + ", audios=" + audios + ", draws=" + draws + "]";
 	}
 	
 	

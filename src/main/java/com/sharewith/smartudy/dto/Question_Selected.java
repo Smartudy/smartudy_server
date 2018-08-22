@@ -6,7 +6,6 @@ package com.sharewith.smartudy.dto;
 
 public class Question_Selected {
     private int id;
-    private String grp;
     private String title;
     private String content;
     private String hashtag;
@@ -22,12 +21,6 @@ public class Question_Selected {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public String getGrp() {
-		return grp;
-	}
-	public void setGrp(String grp) {
-		this.grp = grp;
 	}
 	public String getTitle() {
 		return title;
@@ -91,7 +84,7 @@ public class Question_Selected {
 	}
 	@Override
 	public String toString() {
-		return "Question_Selected [id=" + id + ", grp=" + grp + ", title=" + title + ", content=" + content
+		return "Question_Selected [id=" + id + ", title=" + title + ", content=" + content
 				+ ", hashtag=" + hashtag + ", image=" + image + ", money=" + money + ", time=" + time + ", nickname="
 				+ nickname + ", questioncount=" + questioncount + ", pickrate=" + pickrate + ", level=" + level + "]";
 	}

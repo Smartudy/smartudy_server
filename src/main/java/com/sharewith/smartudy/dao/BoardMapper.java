@@ -13,7 +13,8 @@ import com.sharewith.smartudy.dto.Question_Selected;
 
 public interface BoardMapper {
 	
-	public void InsertQ(HashMap<String,String> map);
+	public void InsertQuestion(HashMap<String,String> map);
+	public void InsertAnswer(HashMap<String,String> map);
 	public ArrayList<Question> getQuestions(@Param("category") String category,@Param("page") int page);
 	@Select("SELECT COUNT(*) FROM Question WHERE CATEGORY = #{category}")
 	public String getQuestionCount(String category);

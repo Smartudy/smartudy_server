@@ -25,9 +25,21 @@ public class BoardController {
     @Autowired
 	BoardService service;
 	
-	@RequestMapping(value = "/post", method=RequestMethod.POST)
-	public @ResponseBody String post(MultipartDto dto,HttpServletRequest request) {
-		boolean success = service.insert(dto, request);
+	@RequestMapping(value = "/post/question", method=RequestMethod.POST)
+	public @ResponseBody String postQuestion(MultipartDto dto,HttpServletRequest request) {
+		boolean success = service.insert(dto, request,0);
+		JsonObject root = new JsonObject();
+		if(success) {
+			root.addProperty("success", true);
+		}else {
+			root.addProperty("success", false);
+		}
+		return root.toString();
+	}
+	
+	@RequestMapping(value = "/post/answer", method=RequestMethod.POST)
+	public @ResponseBody String postAnswer(MultipartDto dto,HttpServletRequest request) {
+		boolean success = service.insert(dto, request,1);
 		JsonObject root = new JsonObject();
 		if(success) {
 			root.addProperty("success", true);
