@@ -26,6 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.sharewith.smartudy.dao.BoardMapper;
 import com.sharewith.smartudy.dto.Question;
+import com.sharewith.smartudy.dto.Question_Selected;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -50,10 +51,10 @@ public class BoardServiceTest {
 			obj.put("success", true);
 			for(int i=0; i<list.size(); i++) {//이미지 이름을 가지고 바이너리 데이터를 만듬.
 				Question q = list.get(i);
-				String imagename = q.getimage1();
+				String imagename = q.getImage1();
 				String imagepath = context.getServletContext().getRealPath("/images/");
 				imagepath += imagename;
-				q.setimage1(imagepath);
+				q.setImage1(imagepath);
 				System.out.println(imagepath);
 			}
 			JSONArray arr = JSONArray.fromObject(list);
@@ -63,6 +64,22 @@ public class BoardServiceTest {
 		}
 		System.out.println(obj.toString());
 	}
+	
+	@Test
+	public void getSelectedQuestion() {
+		Question_Selected question = dao.getSelectedQuestion("1");
+		JSONObject root = new JSONObject();
+		JSONObject obj = new JSONObject();
+		obj = JSONObject.fromObject(question);
+		if(obj != null) {
+			root.put("success", true);
+			root.put("data", obj);
+		}else {
+			root.put("success", false);
+		}
+		System.out.println(root.toString());
+	}
+	
 	
 	@Test
 	public void getQuestionCounttest() {

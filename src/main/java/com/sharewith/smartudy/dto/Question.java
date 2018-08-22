@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Question {
+	private int id;
+	private String grp;
     private String title;
     private String content;
     private String hashtag;
@@ -10,17 +12,25 @@ public class Question {
     private String money;
     private String time;
 
-    public Question() {
-    }
-    public Question(String title, String content, String hashtag, String image1, String money, String time) {
-        this.title = title;
-        this.content = content;
-        this.hashtag = hashtag;
-        this.image1 = image1;
-        this.money = money;
-        this.time = time;
-    }
-    public String getTitle() {
+    public String getGrp() {
+		return grp;
+	}
+	public void setGrp(String grp) {
+		this.grp = grp;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getImage1() {
+		return image1;
+	}
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+	public String getTitle() {
         return title;
     }
     public void setTitle(String title) {
@@ -50,16 +60,10 @@ public class Question {
     public void setTime(String time) {
         this.time = time;
     }
-    public String getimage1() {
-        return image1;
-    }
-    public void setimage1(String image1) {
-        this.image1 = image1;
-    }
 	@Override
 	public String toString() {
-		return "Question [title=" + title + ", content=" + content + ", hashtag=" + hashtag + ", image1=" + image1
-				+ ", money=" + money + ", time=" + time + "]";
+		return "Question [id=" + id + ", grp=" + grp + ", title=" + title + ", content=" + content + ", hashtag="
+				+ hashtag + ", image1=" + image1 + ", money=" + money + ", time=" + time + "]";
 	}
     
     

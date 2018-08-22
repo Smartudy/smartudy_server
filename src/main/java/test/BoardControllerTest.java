@@ -35,6 +35,18 @@ public class BoardControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
 	}
 	
+	@Test
+	public void getSelectedQuestion() throws Exception {
+		MvcResult result = mockMvc.perform(
+				get("/board/question")
+				.param("id", "1")
+				.accept(MediaType.APPLICATION_JSON)
+				.characterEncoding("UTF-8"))
+		.andDo(print()).andReturn();
+		
+		String json = result.getResponse().getContentAsString();
+		System.out.println(json);
+	}
 	
 	
 	@Test

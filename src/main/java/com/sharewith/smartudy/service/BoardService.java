@@ -14,6 +14,7 @@ import com.sharewith.smartudy.dao.BoardMapper;
 import com.sharewith.smartudy.dto.AccountDto;
 import com.sharewith.smartudy.dto.MultipartDto;
 import com.sharewith.smartudy.dto.Question;
+import com.sharewith.smartudy.dto.Question_Selected;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -31,6 +32,20 @@ public class BoardService {
 		String count = dao.getQuestionCount(category);
 		JSONObject obj = new JSONObject();
 		obj.put("count", count);
+		return obj.toString();
+	}
+
+	public String getSelectedQuestion(String id) {
+		Question_Selected question = dao.getSelectedQuestion(id);
+		JSONObject root = new JSONObject();
+		JSONObject obj = new JSONObject();
+		obj = JSONObject.fromObject(question);
+		if(obj != null) {
+			root.put("success", true);
+			root.put("data", obj);
+		}else {
+			root.put("success", false);
+		}
 		return obj.toString();
 	}
 	
@@ -106,7 +121,7 @@ public class BoardService {
 		    	map.put("draw"+c++,e.getOriginalFilename());
 			}
 		}
-		dao.Insert(map);
+		dao.InsertQ(map);
 		return true;
 	}
 	

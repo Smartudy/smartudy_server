@@ -16,6 +16,8 @@ import com.sharewith.smartudy.dto.MultipartDto;
 import com.sharewith.smartudy.dto.Question;
 import com.sharewith.smartudy.service.BoardService;
 
+import net.sf.json.JSONObject;
+
 
 @Controller
 @RequestMapping("/board")
@@ -33,6 +35,16 @@ public class BoardController {
 			root.addProperty("success", false);
 		}
 		return root.toString();
+	}
+	
+	@RequestMapping(value = "/question", method=RequestMethod.GET)
+	public @ResponseBody String getSelectedQuestion(MultipartDto dto,HttpServletRequest request) {
+		String id = request.getParameter("id");
+		String result = service.getSelectedQuestion(id);
+		if(result != null)
+			return result;
+		return null;
+		
 	}
 	
 	@RequestMapping(value = "/listpage", method=RequestMethod.GET)
