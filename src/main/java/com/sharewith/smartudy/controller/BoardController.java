@@ -59,6 +59,16 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping(value = "/answer", method=RequestMethod.GET)
+	public @ResponseBody String getAnswers(MultipartDto dto,HttpServletRequest request) {
+		String group = request.getParameter("grp");
+		String result = service.getAnswers(group);
+		if(result != null)
+			return result;
+		return null;
+		
+	}
+	
 	@RequestMapping(value = "/listpage", method=RequestMethod.GET)
 	public @ResponseBody String listpage(HttpServletRequest request) {
 		String page = request.getParameter("page");

@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.sharewith.smartudy.dao.BoardMapper;
+import com.sharewith.smartudy.dto.Answer;
 import com.sharewith.smartudy.dto.Question;
 import com.sharewith.smartudy.dto.Question_Selected;
 
@@ -57,6 +58,21 @@ public class BoardServiceTest {
 				q.setImage1(imagepath);
 				System.out.println(imagepath);
 			}
+			JSONArray arr = JSONArray.fromObject(list);
+			obj.put("datas", arr);
+		}else {
+			obj.put("success", false);
+		}
+		System.out.println(obj.toString());
+	}
+	
+	@Test
+	public void getAnswers() {
+	
+		ArrayList<Answer> list = dao.getAnswers("4");
+		JSONObject obj = new JSONObject();
+		if(list != null) {
+			obj.put("success", true);
 			JSONArray arr = JSONArray.fromObject(list);
 			obj.put("datas", arr);
 		}else {

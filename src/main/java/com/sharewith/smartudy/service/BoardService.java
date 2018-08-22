@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sharewith.smartudy.dao.BoardMapper;
 import com.sharewith.smartudy.dao.UserMapper;
 import com.sharewith.smartudy.dto.AccountDto;
+import com.sharewith.smartudy.dto.Answer;
 import com.sharewith.smartudy.dto.MultipartDto;
 import com.sharewith.smartudy.dto.Question;
 import com.sharewith.smartudy.dto.Question_Selected;
@@ -47,6 +48,19 @@ public class BoardService {
 			root.put("success", false);
 		}
 		return obj.toString();
+	}
+	
+	public String getAnswers(String grp) {
+		ArrayList<Answer> answers = dao.getAnswers(grp);
+		JSONObject root = new JSONObject();
+		JSONArray obj = JSONArray.fromObject(answers);
+		if(obj != null) {
+			root.put("success", true);
+			root.put("datas", obj);
+		}else {
+			root.put("success", false);
+		}
+		return root.toString();
 	}
 	
 	public String getQuestions(String category,String page) {
