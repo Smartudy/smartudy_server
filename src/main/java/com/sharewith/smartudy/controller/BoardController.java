@@ -31,6 +31,8 @@ public class BoardController {
 		JsonObject root = new JsonObject();
 		if(success) {
 			root.addProperty("success", true);
+			String id = String.valueOf(service.getInsertedID(0));
+			root.addProperty("id", id);
 		}else {
 			root.addProperty("success", false);
 		}
@@ -43,6 +45,8 @@ public class BoardController {
 		JsonObject root = new JsonObject();
 		if(success) {
 			root.addProperty("success", true);
+			String id = String.valueOf(service.getInsertedID(1));
+			root.addProperty("id", id);
 		}else {
 			root.addProperty("success", false);
 		}
@@ -59,10 +63,20 @@ public class BoardController {
 		
 	}
 	
-	@RequestMapping(value = "/answer", method=RequestMethod.GET)
+	@RequestMapping(value = "/answers", method=RequestMethod.GET)
 	public @ResponseBody String getAnswers(MultipartDto dto,HttpServletRequest request) {
 		String group = request.getParameter("grp");
 		String result = service.getAnswers(group);
+		if(result != null)
+			return result;
+		return null;
+		
+	}
+	
+	@RequestMapping(value = "/answer", method=RequestMethod.GET)
+	public @ResponseBody String getAnswer(MultipartDto dto,HttpServletRequest request) {
+		String id = request.getParameter("id");
+		String result = service.getAnswer(id);
 		if(result != null)
 			return result;
 		return null;

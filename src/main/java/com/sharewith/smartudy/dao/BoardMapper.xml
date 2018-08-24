@@ -31,7 +31,7 @@
 			#{image3, jdbcType=VARCHAR},#{image4, jdbcType=VARCHAR},
 			#{image5, jdbcType=VARCHAR},#{image6, jdbcType=VARCHAR},
 			#{image7, jdbcType=VARCHAR},#{audio1,jdbcType=VARCHAR},
-			#{audio2,jdbcType=VARCHAR},#{audio3,jdbcType=VARCHAR})
+			#{audio2,jdbcType=VARCHAR},#{audio3,jdbcType=VARCHAR}) 
 </insert> 
 
 <select id="getQuestions" resultType="com.sharewith.smartudy.dto.Question">
@@ -40,6 +40,10 @@
 
 <select id="getAnswers" resultType="com.sharewith.smartudy.dto.Answer">
 	SELECT id,grp,title,content,hashtag,image1,money,time from answer WHERE  grp = #{grp}
+</select>
+
+<select id="getAnswer" resultType="com.sharewith.smartudy.dto.Answer">
+	SELECT id,grp,title,content,hashtag,image1,money,time from answer WHERE id = #{id}
 </select>
 
 <select id="getSelectedQuestion" resultType="com.sharewith.smartudy.dto.Question_Selected">

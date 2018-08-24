@@ -18,7 +18,12 @@ public interface BoardMapper {
 	public void InsertAnswer(HashMap<String,String> map);
 	public ArrayList<Question> getQuestions(@Param("category") String category,@Param("page") int page);
 	public ArrayList<Answer> getAnswers(@Param("grp") String grp);
+	public Answer getAnswer(@Param("id") String id);
 	@Select("SELECT COUNT(*) FROM Question WHERE CATEGORY = #{category}")
 	public String getQuestionCount(String category);
 	public Question_Selected getSelectedQuestion(String id);
+	@Select("SELECT count(*) from ANSWER")
+	public int getAnswerTotalCount();
+	@Select("SELECT count(*) from QUESTION")
+	public int getQuestionTotalCount();
 }

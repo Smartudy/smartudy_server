@@ -63,6 +63,19 @@ public class BoardService {
 		return root.toString();
 	}
 	
+	public String getAnswer(String id) {
+		Answer answer = dao.getAnswer(id);
+		JSONObject root = new JSONObject();
+		JSONObject obj = JSONObject.fromObject(answer);
+		if(obj != null) {
+			root.put("success", true);
+			root.put("data", obj);
+		}else {
+			root.put("success", false);
+		}
+		return root.toString();
+	}
+	
 	public String getQuestions(String category,String page) {
 		ArrayList<Question> list = dao.getQuestions(category,Integer.parseInt(page));
 		JSONObject obj = new JSONObject();
@@ -75,7 +88,12 @@ public class BoardService {
 		}
 		return obj.toString();
 	}
-	
+	public int getInsertedID(int qna) {
+		if(qna == 0)//question
+			return dao.getQuestionTotalCount();
+		else
+			return dao.getAnswerTotalCount();
+	}
 	public boolean insert(MultipartDto dto,HttpServletRequest request,int qna) {
 		String text,imagepath,audiopath,drawpath = "";
 		HashMap<String,String> map = new HashMap<String,String>();
